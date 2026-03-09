@@ -15,11 +15,12 @@ interface AppProps {
   initialMode?: GameMode;
 }
 
-type AiDifficulty = "easy" | "normal";
+type AiDifficulty = "easy" | "normal" | "hard";
 
 const aiProfiles: Record<AiDifficulty, { depth: number; timeLimitMs: number }> = {
   easy: { depth: 1, timeLimitMs: 700 },
-  normal: { depth: 2, timeLimitMs: 1500 }
+  normal: { depth: 2, timeLimitMs: 1500 },
+  hard: { depth: 3, timeLimitMs: 3000 }
 };
 
 function isHumanTurn(state: SessionState): boolean {
@@ -133,6 +134,14 @@ function App({ initialFen, initialMode = "local" }: AppProps): JSX.Element {
             onClick={() => setAiDifficulty("normal")}
           >
             {ko.aiNormal}
+          </button>
+          <button
+            type="button"
+            data-testid="ai-difficulty-hard"
+            className={aiDifficulty === "hard" ? "active" : ""}
+            onClick={() => setAiDifficulty("hard")}
+          >
+            {ko.aiHard}
           </button>
         </div>
       </header>

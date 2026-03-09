@@ -15,6 +15,7 @@ describe("chess board", () => {
     expect(screen.getByText("AI 대전")).toBeInTheDocument();
     expect(screen.getByText("쉬움")).toBeInTheDocument();
     expect(screen.getByText("보통")).toBeInTheDocument();
+    expect(screen.getByText("어려움")).toBeInTheDocument();
   });
 
   it("moves pawn from e2 to e4 via board clicks", () => {

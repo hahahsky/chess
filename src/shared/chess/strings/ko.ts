@@ -7,6 +7,7 @@ export const ko = {
   aiDifficulty: "AI 난이도",
   aiEasy: "쉬움",
   aiNormal: "보통",
+  aiHard: "어려움",
   newGame: "새 게임",
   turn: "현재 차례",
   white: "백",
