@@ -32,4 +32,21 @@ describe("chess session", () => {
     expect(reset.turn).toBe("w");
     expect(reset.status).toBe("playing");
   });
+
+  it("blocks any move after checkmate", () => {
+    const session = createGameSession("local");
+
+    session.tryMove("f2", "f3");
+    session.tryMove("e7", "e5");
+    session.tryMove("g2", "g4");
+    const mate = session.tryMove("d8", "h4");
+
+    expect(mate.ok).toBe(true);
+    expect(mate.state.status).toBe("checkmate");
+
+    const blocked = session.tryMove("a2", "a3");
+    expect(blocked.ok).toBe(false);
+    expect(blocked.reason).toBe("illegal");
+    expect(blocked.state.history.at(-1)?.san).toBe("Qh4#");
+  });
 });

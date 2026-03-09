@@ -57,6 +57,9 @@ export class GameSession {
   }
 
   setSelectedSquare(square: string | null): SessionState {
+    if (this.chess.isGameOver()) {
+      return this.getState();
+    }
     this.selectedSquare = square;
     return this.getState();
   }
@@ -89,6 +92,12 @@ export class GameSession {
   }
 
   tryMove(from: string, to: string, promotion?: PieceSymbol): MoveResult {
+    if (this.chess.isGameOver()) {
+      this.selectedSquare = null;
+      this.pendingPromotion = null;
+      return { ok: false, state: this.getState(), reason: "illegal" };
+    }
+
     const fromSquare = this.toSquare(from);
     const toSquare = this.toSquare(to);
     if (!fromSquare || !toSquare) {
@@ -115,6 +124,9 @@ export class GameSession {
   }
 
   applyAiMove(options: { depth?: number; timeLimitMs?: number } = {}): MoveResult {
+    if (this.chess.isGameOver()) {
+      return { ok: false, state: this.getState(), reason: "illegal" };
+    }
     const move = pickBeginnerMove(this.chess.fen(), options);
     if (!move) {
       return { ok: false, state: this.getState(), reason: "illegal" };

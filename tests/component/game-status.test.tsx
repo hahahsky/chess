@@ -16,6 +16,14 @@ describe("game status", () => {
     fireEvent.click(screen.getByTestId("square-h4"));
 
     expect(screen.getByTestId("status-banner").textContent).toContain("체크메이트");
+
+    const historyBefore = screen.getByTestId("move-history").textContent ?? "";
+    fireEvent.click(screen.getByTestId("square-a2"));
+    fireEvent.click(screen.getByTestId("square-a3"));
+    const historyAfter = screen.getByTestId("move-history").textContent ?? "";
+
+    expect(historyAfter).toBe(historyBefore);
+    expect(historyAfter).toContain("Qh4#");
   });
 
   it("opens promotion modal and applies queen promotion", () => {
