@@ -31,6 +31,12 @@ body {
   border-color: #93d7f3;
 }
 
+.difficulty-hint {
+  margin: -4px 0 12px;
+  color: #bcd3df;
+  font-size: 13px;
+}
+
 .layout {
   display: grid;
   grid-template-columns: minmax(320px, 520px) minmax(180px, 1fr);

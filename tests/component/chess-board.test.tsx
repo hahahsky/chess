@@ -16,6 +16,17 @@ describe("chess board", () => {
     expect(screen.getByText("쉬움")).toBeInTheDocument();
     expect(screen.getByText("보통")).toBeInTheDocument();
     expect(screen.getByText("어려움")).toBeInTheDocument();
+    expect(screen.getByTestId("ai-difficulty-hint").textContent).toContain("균형 잡힌");
+  });
+
+  it("updates difficulty hint text when selection changes", () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByTestId("ai-difficulty-easy"));
+    expect(screen.getByTestId("ai-difficulty-hint").textContent).toContain("빠른 응답");
+
+    fireEvent.click(screen.getByTestId("ai-difficulty-hard"));
+    expect(screen.getByTestId("ai-difficulty-hint").textContent).toContain("응답은 느리지만");
   });
 
   it("moves pawn from e2 to e4 via board clicks", () => {

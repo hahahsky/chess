@@ -8,6 +8,9 @@ export const ko = {
   aiEasy: "쉬움",
   aiNormal: "보통",
   aiHard: "어려움",
+  aiHintEasy: "빠른 응답, 초보자용 난이도",
+  aiHintNormal: "균형 잡힌 응답 속도와 수읽기",
+  aiHintHard: "응답은 느리지만 더 강한 수 선택",
   newGame: "새 게임",
   turn: "현재 차례",
   white: "백",
@@ -20,6 +23,16 @@ export const ko = {
   promotionBishop: "비숍",
   promotionKnight: "나이트"
 };
+
+export function difficultyHint(level: "easy" | "normal" | "hard"): string {
+  if (level === "easy") {
+    return ko.aiHintEasy;
+  }
+  if (level === "normal") {
+    return ko.aiHintNormal;
+  }
+  return ko.aiHintHard;
+}
 
 export function modeLabel(mode: GameMode): string {
   return mode === "local" ? ko.modeLocal : ko.modeAi;

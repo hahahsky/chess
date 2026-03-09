@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import type { PieceSymbol } from "chess.js";
 import { createGameSession, type GameSession } from "../../shared/chess/session";
-import { ko } from "../../shared/chess/strings/ko";
+import { difficultyHint, ko } from "../../shared/chess/strings/ko";
 import type { GameMode, SessionState } from "../../shared/chess/types";
 import { ChessBoard } from "./components/ChessBoard";
 import { MoveHistory } from "./components/MoveHistory";
@@ -144,6 +144,9 @@ function App({ initialFen, initialMode = "local" }: AppProps): JSX.Element {
             {ko.aiHard}
           </button>
         </div>
+        <p data-testid="ai-difficulty-hint" className="difficulty-hint">
+          {difficultyHint(aiDifficulty)}
+        </p>
       </header>
 
       <StatusBanner state={state} isAiThinking={isAiThinking} />
