@@ -1,0 +1,4 @@
+Task 4 draw policy
+- threefold repetition detection validated
+- fifty-move rule detection validated
+- draw statuses mapped via shared status evaluator

@@ -1,0 +1,3 @@
+Task 4 promotion fixtures
+- underpromotion fixture validated (a7->a8=n)
+- promotion-to-checkmate path validated by rules fixture tests

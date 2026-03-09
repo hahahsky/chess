@@ -1,0 +1,3 @@
+Task 5 board click interaction
+- component flow: select square-e2 then square-e4
+- expected result: white pawn appears on e4 and SAN history records e4

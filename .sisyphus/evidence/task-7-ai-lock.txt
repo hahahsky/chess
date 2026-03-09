@@ -1,0 +1,3 @@
+Task 7 AI lock behavior
+- e2e flow in AI mode verifies AI-think state after player move
+- repeated player input during AI turn is ignored until AI move resolves

@@ -1,0 +1,3 @@
+Task 8 artifact guard
+- build artifact assertion checks: dist/main/index.js, dist/preload/index.js, dist/renderer/index.html
+- packaging assertion checks: dist/win-unpacked exists and contains executable

@@ -1,0 +1,109 @@
+.app-shell {
+  margin: 0 auto;
+  max-width: 1100px;
+  padding: 16px;
+  color: #e8eef2;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #203346 0%, #0d1822 50%, #080f16 100%);
+}
+
+.control-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.control-row button {
+  border: 1px solid #6fa8c2;
+  border-radius: 8px;
+  background: #142737;
+  color: #f6fbff;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 520px) minmax(180px, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.board-wrapper {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(36px, 1fr));
+  border: 2px solid #203b4f;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.square {
+  position: relative;
+  aspect-ratio: 1;
+  border: 0;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.coord-file {
+  position: absolute;
+  right: 4px;
+  bottom: 2px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.coord-rank {
+  position: absolute;
+  left: 4px;
+  top: 2px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.square.light {
+  background: #e9d7b7;
+}
+
+.square.dark {
+  background: #7d5f45;
+}
+
+.square.selected {
+  outline: 3px solid #37d2ff;
+  outline-offset: -3px;
+}
+
+.piece {
+  line-height: 1;
+}
+
+.promotion-modal {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #58b7db;
+  background: rgba(6, 18, 28, 0.85);
+}
+
+.promotion-modal button {
+  margin-right: 8px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}

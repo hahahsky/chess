@@ -1,0 +1,3 @@
+Task 3 session happy path
+- unit case: applies e2e4 and updates fen/history
+- expected: turn switches to black and SAN includes e4

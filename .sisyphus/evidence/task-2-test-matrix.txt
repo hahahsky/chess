@@ -1,0 +1,5 @@
+Task 2 test matrix
+- npm run test:unit: passed
+- npm run test:component: passed
+- npm run test:e2e: passed
+- coverage outputs: .sisyphus/evidence/coverage-unit, .sisyphus/evidence/coverage-component

@@ -1,0 +1,3 @@
+Task 3 session illegal move
+- unit case: rejects e2e5 from initial position
+- expected: state unchanged and history length remains zero

@@ -1,0 +1,3 @@
+Task 5 illegal click guard
+- component flow: select square-e2 then illegal square-e5
+- expected result: board state remains unchanged and no SAN entry added

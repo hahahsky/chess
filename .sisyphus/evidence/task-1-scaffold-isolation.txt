@@ -1,0 +1,3 @@
+Task 1 isolation verification
+- implementation files are inside chess-indie-desktop only
+- unrelated root scratch files were not modified intentionally

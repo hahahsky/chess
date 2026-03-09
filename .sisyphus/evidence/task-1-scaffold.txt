@@ -1,0 +1,5 @@
+Task 1 scaffold verification
+- project root initialized: chess-indie-desktop
+- required files present: package.json, src/main/index.ts, src/preload/index.ts, src/renderer/src/App.tsx, .gitignore
+- npm install: passed
+- npm run build: passed (includes packaging path)

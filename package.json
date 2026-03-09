@@ -1,0 +1,40 @@
+{
+  "name": "chess-indie-desktop",
+  "version": "0.0.0",
+  "private": true,
+  "main": "dist/main/index.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build:assets": "electron-vite build && node ./scripts/normalize-renderer-output.mjs",
+    "build": "npm run build:assets && set CSC_IDENTITY_AUTO_DISCOVERY=false&& set WIN_CSC_LINK=&& set WIN_CSC_KEY_PASSWORD=&& electron-builder --win --x64 --dir --config electron-builder.yml && node ./scripts/assert-build-artifacts.mjs",
+    "preview": "electron-vite preview",
+    "typecheck": "tsc --build",
+    "test:unit": "vitest run --config vitest.unit.config.ts --coverage",
+    "test:component": "vitest run --config vitest.component.config.ts --coverage",
+    "test:e2e": "npm run build:assets && playwright test",
+    "test": "npm run test:unit && npm run test:component && npm run test:e2e",
+    "build:win": "npm run build"
+  },
+  "dependencies": {
+    "chess.js": "^1.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.29",
+    "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.4.1",
+    "@playwright/test": "^1.54.2",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@vitest/coverage-v8": "^2.1.9",
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3",
+    "electron-vite": "^2.3.0",
+    "jsdom": "^26.1.0",
+    "typescript": "^5.8.3",
+    "vite": "^5.4.19",
+    "vitest": "^2.1.9"
+  }
+}

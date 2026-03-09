@@ -1,0 +1,11 @@
+appId: com.chess.indie.desktop
+productName: ChessIndieDesktop
+directories:
+  buildResources: build
+files:
+  - dist/**
+  - package.json
+win:
+  signAndEditExecutable: false
+  target:
+    - dir
