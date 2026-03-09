@@ -35,4 +35,17 @@ describe("game status", () => {
     fireEvent.click(screen.getByTestId("promotion-queen"));
     expect(screen.getByTestId("square-a8").textContent).toContain("♕");
   });
+
+  it("keeps board locked in stalemate state", () => {
+    render(<App initialFen={fixtures.stalemate} />);
+
+    expect(screen.getByTestId("status-banner").textContent).toContain("무승부 - 스테일메이트");
+
+    const historyBefore = screen.getByTestId("move-history").textContent ?? "";
+    fireEvent.click(screen.getByTestId("square-h8"));
+    fireEvent.click(screen.getByTestId("square-h7"));
+    const historyAfter = screen.getByTestId("move-history").textContent ?? "";
+
+    expect(historyAfter).toBe(historyBefore);
+  });
 });
