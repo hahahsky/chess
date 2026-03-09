@@ -10,7 +10,7 @@ export const ko = {
   aiHard: "어려움",
   aiHintEasy: "빠른 응답, 초보자용 난이도",
   aiHintNormal: "균형 잡힌 응답 속도와 수읽기",
-  aiHintHard: "응답은 느리지만 더 강한 수 선택",
+  aiHintHard: "다소 느리지만 더 강한 수 선택",
   newGame: "새 게임",
   turn: "현재 차례",
   white: "백",

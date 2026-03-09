@@ -18,9 +18,9 @@ interface AppProps {
 type AiDifficulty = "easy" | "normal" | "hard";
 
 const aiProfiles: Record<AiDifficulty, { depth: number; timeLimitMs: number }> = {
-  easy: { depth: 1, timeLimitMs: 700 },
-  normal: { depth: 2, timeLimitMs: 1500 },
-  hard: { depth: 3, timeLimitMs: 3000 }
+  easy: { depth: 1, timeLimitMs: 500 },
+  normal: { depth: 2, timeLimitMs: 900 },
+  hard: { depth: 3, timeLimitMs: 1400 }
 };
 
 function isHumanTurn(state: SessionState): boolean {

@@ -15,6 +15,16 @@ interface CandidateMove {
   promotion?: PieceSymbol;
 }
 
+interface SearchGuard {
+  deadlineAt: number;
+  nodesRemaining: number;
+}
+
+const MIN_TIME_LIMIT_MS = 200;
+const MAX_TIME_LIMIT_MS = 2000;
+const DEFAULT_TIME_LIMIT_MS = 1200;
+const NODE_BUDGET = 12000;
+
 function evaluateBoard(chess: Chess): number {
   let score = 0;
   for (const row of chess.board()) {
@@ -43,11 +53,12 @@ function minimax(
   alpha: number,
   beta: number,
   maximizing: boolean,
-  deadlineAt: number
+  guard: SearchGuard
 ): number {
-  if (Date.now() >= deadlineAt) {
+  if (Date.now() >= guard.deadlineAt || guard.nodesRemaining <= 0) {
     return evaluateBoard(chess);
   }
+  guard.nodesRemaining -= 1;
 
   if (depth === 0 || chess.isGameOver()) {
     return evaluateBoard(chess);
@@ -57,11 +68,11 @@ function minimax(
   if (maximizing) {
     let value = -Infinity;
     for (const move of moves) {
-      if (Date.now() >= deadlineAt) {
+      if (Date.now() >= guard.deadlineAt || guard.nodesRemaining <= 0) {
         break;
       }
       chess.move(move);
-      value = Math.max(value, minimax(chess, depth - 1, alpha, beta, false, deadlineAt));
+      value = Math.max(value, minimax(chess, depth - 1, alpha, beta, false, guard));
       chess.undo();
       alpha = Math.max(alpha, value);
       if (beta <= alpha) {
@@ -73,11 +84,11 @@ function minimax(
 
   let value = Infinity;
   for (const move of moves) {
-    if (Date.now() >= deadlineAt) {
+    if (Date.now() >= guard.deadlineAt || guard.nodesRemaining <= 0) {
       break;
     }
     chess.move(move);
-    value = Math.min(value, minimax(chess, depth - 1, alpha, beta, true, deadlineAt));
+    value = Math.min(value, minimax(chess, depth - 1, alpha, beta, true, guard));
     chess.undo();
     beta = Math.min(beta, value);
     if (beta <= alpha) {
@@ -93,9 +104,10 @@ export function pickBeginnerMove(
 ): CandidateMove | null {
   const chess = new Chess(fen);
   const depth = options.depth ?? 2;
-  const timeLimitMs = options.timeLimitMs ?? 5000;
-  const start = Date.now();
-  const deadlineAt = start + timeLimitMs;
+  const requestedLimit = options.timeLimitMs ?? DEFAULT_TIME_LIMIT_MS;
+  const timeLimitMs = Math.max(MIN_TIME_LIMIT_MS, Math.min(MAX_TIME_LIMIT_MS, requestedLimit));
+  const deadlineAt = Date.now() + timeLimitMs;
+  const guard: SearchGuard = { deadlineAt, nodesRemaining: NODE_BUDGET };
 
   const moves = orderedMoves(chess);
   if (moves.length === 0) {
@@ -107,11 +119,11 @@ export function pickBeginnerMove(
   let bestScore = maximizing ? -Infinity : Infinity;
 
   for (const move of moves) {
-    if (Date.now() >= deadlineAt) {
+    if (Date.now() >= guard.deadlineAt || guard.nodesRemaining <= 0) {
       break;
     }
     chess.move(move);
-    const score = minimax(chess, depth - 1, -Infinity, Infinity, !maximizing, deadlineAt);
+    const score = minimax(chess, depth - 1, -Infinity, Infinity, !maximizing, guard);
     chess.undo();
 
     if (maximizing ? score > bestScore : score < bestScore) {

@@ -26,7 +26,7 @@ describe("chess board", () => {
     expect(screen.getByTestId("ai-difficulty-hint").textContent).toContain("빠른 응답");
 
     fireEvent.click(screen.getByTestId("ai-difficulty-hard"));
-    expect(screen.getByTestId("ai-difficulty-hint").textContent).toContain("응답은 느리지만");
+    expect(screen.getByTestId("ai-difficulty-hint").textContent).toContain("다소 느리지만");
   });
 
   it("moves pawn from e2 to e4 via board clicks", () => {
