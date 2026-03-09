@@ -38,7 +38,7 @@ export function useAiTurn({
 
     setIsAiThinking(true);
     const timer = setTimeout(() => {
-      const result = session.applyAiMove({ depth: 2, timeLimitMs: 5000 });
+      const result = session.applyAiMove({ depth: 2, timeLimitMs: 1500 });
       setState(result.state);
       setIsAiThinking(false);
     }, 50);
