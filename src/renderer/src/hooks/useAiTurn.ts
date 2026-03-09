@@ -8,6 +8,8 @@ interface UseAiTurnOptions {
   setState: (state: SessionState) => void;
   isAiThinking: boolean;
   setIsAiThinking: (thinking: boolean) => void;
+  aiDepth: number;
+  aiTimeLimitMs: number;
 }
 
 export function useAiTurn({
@@ -15,7 +17,9 @@ export function useAiTurn({
   state,
   setState,
   isAiThinking,
-  setIsAiThinking
+  setIsAiThinking,
+  aiDepth,
+  aiTimeLimitMs
 }: UseAiTurnOptions): void {
   const terminalStatuses = new Set([
     "checkmate",
@@ -38,7 +42,7 @@ export function useAiTurn({
 
     setIsAiThinking(true);
     const timer = setTimeout(() => {
-      const result = session.applyAiMove({ depth: 2, timeLimitMs: 1500 });
+      const result = session.applyAiMove({ depth: aiDepth, timeLimitMs: aiTimeLimitMs });
       setState(result.state);
       setIsAiThinking(false);
     }, 50);
@@ -46,5 +50,5 @@ export function useAiTurn({
     return () => {
       clearTimeout(timer);
     };
-  }, [isAiThinking, session, setIsAiThinking, setState, state]);
+  }, [aiDepth, aiTimeLimitMs, isAiThinking, session, setIsAiThinking, setState, state]);
 }

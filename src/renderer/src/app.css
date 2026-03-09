@@ -26,6 +26,11 @@ body {
   cursor: pointer;
 }
 
+.control-row button.active {
+  background: #2f7da2;
+  border-color: #93d7f3;
+}
+
 .layout {
   display: grid;
   grid-template-columns: minmax(320px, 520px) minmax(180px, 1fr);

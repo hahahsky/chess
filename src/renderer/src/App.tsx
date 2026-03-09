@@ -15,6 +15,13 @@ interface AppProps {
   initialMode?: GameMode;
 }
 
+type AiDifficulty = "easy" | "normal";
+
+const aiProfiles: Record<AiDifficulty, { depth: number; timeLimitMs: number }> = {
+  easy: { depth: 1, timeLimitMs: 700 },
+  normal: { depth: 2, timeLimitMs: 1500 }
+};
+
 function isHumanTurn(state: SessionState): boolean {
   if (state.mode === "local") {
     return true;
@@ -37,13 +44,16 @@ function App({ initialFen, initialMode = "local" }: AppProps): JSX.Element {
   const sessionRef = useRef<GameSession>(createGameSession(initialMode, initialFen));
   const [state, setState] = useState<SessionState>(sessionRef.current.getState());
   const [isAiThinking, setIsAiThinking] = useState(false);
+  const [aiDifficulty, setAiDifficulty] = useState<AiDifficulty>("normal");
 
   useAiTurn({
     session: sessionRef.current,
     state,
     setState,
     isAiThinking,
-    setIsAiThinking
+    setIsAiThinking,
+    aiDepth: aiProfiles[aiDifficulty].depth,
+    aiTimeLimitMs: aiProfiles[aiDifficulty].timeLimitMs
   });
 
   const onSquareClick = (square: string): void => {
@@ -104,6 +114,25 @@ function App({ initialFen, initialMode = "local" }: AppProps): JSX.Element {
           </button>
           <button type="button" data-testid="new-game-button" onClick={onNewGame}>
             {ko.newGame}
+          </button>
+        </div>
+        <div className="control-row">
+          <span>{ko.aiDifficulty}:</span>
+          <button
+            type="button"
+            data-testid="ai-difficulty-easy"
+            className={aiDifficulty === "easy" ? "active" : ""}
+            onClick={() => setAiDifficulty("easy")}
+          >
+            {ko.aiEasy}
+          </button>
+          <button
+            type="button"
+            data-testid="ai-difficulty-normal"
+            className={aiDifficulty === "normal" ? "active" : ""}
+            onClick={() => setAiDifficulty("normal")}
+          >
+            {ko.aiNormal}
           </button>
         </div>
       </header>
