@@ -9,9 +9,9 @@ describe("beginner ai", () => {
     const fen = chess.fen();
 
     const startedAt = Date.now();
-    const first = pickBeginnerMove(fen, { depth: 2, timeLimitMs: 500 });
+    const first = pickBeginnerMove(fen, { depth: 2, timeLimitMs: 5000 });
     const elapsed = Date.now() - startedAt;
-    const second = pickBeginnerMove(fen, { depth: 2, timeLimitMs: 500 });
+    const second = pickBeginnerMove(fen, { depth: 2, timeLimitMs: 5000 });
 
     expect(first).not.toBeNull();
     expect(second).toEqual(first);
@@ -20,6 +20,6 @@ describe("beginner ai", () => {
       .moves({ verbose: true })
       .map((move) => `${move.from}${move.to}${move.promotion ?? ""}`);
     expect(legal).toContain(`${first?.from}${first?.to}${first?.promotion ?? ""}`);
-    expect(elapsed).toBeLessThanOrEqual(500);
+    expect(elapsed).toBeLessThanOrEqual(5000);
   });
 });

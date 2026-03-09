@@ -76,7 +76,7 @@ export function pickBeginnerMove(
 ): CandidateMove | null {
   const chess = new Chess(fen);
   const depth = options.depth ?? 2;
-  const timeLimitMs = options.timeLimitMs ?? 500;
+  const timeLimitMs = options.timeLimitMs ?? 5000;
   const start = Date.now();
 
   const moves = orderedMoves(chess);
